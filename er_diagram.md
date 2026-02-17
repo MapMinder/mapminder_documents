@@ -12,8 +12,6 @@ oauth_tokens {
     varchar(40) user_id FK 
     varchar(50) oauth_provider
     varchar(255) oauth_provider_id
-    text refresh_token
-    timestamp access_token_expiry
     datetime created_at
     datetime updated_at
 }
