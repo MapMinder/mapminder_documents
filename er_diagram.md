@@ -7,7 +7,7 @@ config:
 ---
 erDiagram
 
-oauth_tokens {
+oauth_token {
     int oauth_id PK
     varchar(40) user_id FK 
     varchar(50) oauth_provider
@@ -25,7 +25,7 @@ user_setting {
     datetime updated_at
 }
 
-users {
+user {
     varchar(40) user_id PK
     varchar(60) username
     varchar(255) email
@@ -33,13 +33,13 @@ users {
     datetime updated_at
 }
 
-tags {
+tag {
     int tag_id PK
     id note_id FK
     varchar(20) tag
 }
 
-locations {
+location {
     int location_id PK
     int reminder_id FK
     float latitude
@@ -47,7 +47,7 @@ locations {
     varchar(60) place_name
 }
 
-reminders {
+reminder {
     int reminder_id PK
     varchar(40) user_id FK
     int note_id
@@ -56,7 +56,7 @@ reminders {
     datetime date_time
 }
 
-notes {
+note {
     int note_id PK
     int reminder_id FK
     varchar(255) title
@@ -65,7 +65,7 @@ notes {
     datetime updated_at
 }
 
-notifications {
+notification {
     int notification_id PK
     varchar(40) user_id FK
     int reminder_id FK
@@ -73,18 +73,18 @@ notifications {
     varchar(10) status
 }
 
-reminder_recurrences {
+reminder_recurrence {
     int recurrence_id PK
     int reminder_id FK
     varchar(10) recurrence_type
 }
 
-users ||--o{ reminders : has
-users ||--o{ oauth_tokens : has
-users ||--|| user_setting : has
-reminders ||--o{ notes : has
-notes ||--o{ tags : has
-reminders ||--|| locations : has
-reminders ||--|| notifications : has
-reminders ||--o| reminder_recurrences : might_have
+user ||--o{ reminder : has
+user ||--o{ oauth_token : has
+user ||--|| user_setting : has
+reminder ||--o{ note : has
+note ||--o{ tag : has
+reminder ||--|| location : has
+reminder ||--|| notification : has
+reminder ||--o| reminder_recurrence : might_have
 ```
