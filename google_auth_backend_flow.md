@@ -20,16 +20,19 @@ mf->>mb: POST /auth/google with id_token<br>(received from Flutter's Google_Sign
 mb->>auth: verify id_token
 auth->>auth: verify signature, aud, exp
 alt valid token
-    auth->>mb: return claims (sub, email, name)
+    auth-->>mb: return claims (sub, email, name)
     mb->>mb: extract sub from claims
+    mb->>db: check if user exists
     alt user does not exist
-        mb-->>db: create user and oauth record
+        mb->>db: create user and oauth record
+        mb->>mb: generate JWT for user_id
+    else user exists
+        mb->>mb: generate JWT for user_id
     end
-    mb->>mb: generate JWT for user_id
-    mb->>mf: return JWT (to be used in Authorization header for protected endpoints)
+    mb-->>mf: return JWT (to be used in Authorization header for protected endpoints)
 else invalid token
-    auth->>mb: return error
-    mb->>mf: return 401 Unauthorized
+    auth-->>mb: returns error
+    mb-->>mf: google sign in error
 end
 ```
 
