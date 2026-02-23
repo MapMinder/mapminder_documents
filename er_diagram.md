@@ -40,37 +40,37 @@ tag {
 }
 
 location {
-    int location_id PK
-    int reminder_id FK
+    varchar(40) location_id PK
+    varchar(40) reminder_id FK
     float latitude
     float longitude
-    varchar(60) place_name
+    float radius
 }
 
 reminder {
-    int reminder_id PK
+    varchar(40) reminder_id PK
     varchar(40) user_id FK
-    int note_id
-    int location_id
-    bool reminder_flag
-    datetime date_time
+    varchar(40) note_id
+    varchar(40) location_id
+    datetime created_at
+    datetime updated_at
 }
 
 note {
-    int note_id PK
-    int reminder_id FK
+    varchar(40) note_id PK
+    varchar(40) reminder_id FK
     varchar(255) title
-    text content
+    text description
     datetime created_at
     datetime updated_at
 }
 
 notification {
-    int notification_id PK
+    varchar(40) notification_id PK
     varchar(40) user_id FK
     int reminder_id FK
-    datetime sent_at
-    varchar(10) status
+    datetime last_triggered_at
+    varchar(10) is_active
 }
 
 reminder_recurrence {
