@@ -1,15 +1,18 @@
-# Reminder feature flow
+# Reminder
+---
 
-# TOC
-- [TOC](#toc)
-    - [sequence](#sequence)
-    - [Geofencing – iOS MVP Plan](#geofencing--ios-mvp-plan)
-        - [Scope](#scope)
-        - [Architecture](#architecture)
-        - [Permissions](#permissions)
-        - [Behavior](#behavior)
+- [Sequence Diagram](#sequence-diagram)
+- [Geolocation validity](#geolocation-validity)
+    - [WGS84(World Geodetic System 1984)](#wgs84world-geodetic-system-1984)
+- [Geofencing – iOS MVP Plan](#geofencing--ios-mvp-plan)
+    - [Scope](#scope)
+    - [Architecture](#architecture)
+    - [Permissions](#permissions)
+    - [Behavior](#behavior)
+- [References](#references)
 
-## sequence
+
+## Sequence Diagram
 
 ```mermaid
 sequenceDiagram
@@ -55,7 +58,16 @@ mb->>mf: success
 mf->>gf: remove geofence
 mf->>user: show completion confirmation
 ```
----
+
+
+## Geolocation validity
+### WGS84(World Geodetic System 1984)
+- A valid WGS84[^1] is defined as the following:
+    - **Latitude:** must be between -90.0 and 90.0(degrees)
+    - **Longitude:** must be between -180.0 and 180.0(degrees)
+- WGS84 also defines and altitude component but this does not apply for our usecase so we will not validate this
+- NULL Island(0.0, 0.0) is a valid coordinate according to WGS84 but we will not use this as a valid location.(Again does not satisfy our usecase)
+
 
 ## Geofencing – iOS MVP Plan
 ### Scope
@@ -91,3 +103,7 @@ Flutter → MethodChannel → Native Swift → CoreLocation (Region Monitoring)
 - Max 20 regions
 - Radius ≥ 100m
 - Not real-time GPS tracking
+
+## References
+[^1]: [WGS84(World Geodetic System 1984)](https://en.wikipedia.org/wiki/World_Geodetic_System)
+

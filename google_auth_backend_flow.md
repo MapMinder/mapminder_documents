@@ -1,13 +1,15 @@
 # Backend authentication flow - Google sign in(MVP)
 
-## TOC
+---
 
-- [Google Sign In sequence diagram](#google-sign-in-sequence-diagram)
-    - [Google ID Token Verification - Endpoint & Response](#google-id-token-verification---endpoint--response)
-        - [Endpoint](#endpoint)
-        - [response](#response)
+- [Sequence Diagram](#sequence-diagram)
+- [Google ID Token Verification - Endpoint & Response](#google-id-token-verification---endpoint--response)
+    - [Endpoint](#endpoint)
+    - [response](#response)
 
-## sequence
+---
+
+## Sequence Diagram
 
 ```mermaid
 sequenceDiagram
@@ -36,13 +38,15 @@ else invalid token
 end
 ```
 
-### Google ID Token Verification - Endpoint & Response
+---
 
-#### Endpoint
+## Google ID Token Verification - Endpoint & Response
 
-GET https://oauth2.googleapis.com/tokeninfo?id_token=<ID_TOKEN>
+### Endpoint
 
-#### response
+> GET https://oauth2.googleapis.com/tokeninfo?id_token=<ID_TOKEN>
+
+### response
 
 **valid token response**
 
