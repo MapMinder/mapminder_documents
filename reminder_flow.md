@@ -104,6 +104,23 @@ Flutter → MethodChannel → Native Swift → CoreLocation (Region Monitoring)
 - Radius ≥ 100m
 - Not real-time GPS tracking
 
+### Reminder State model
+Reminder State Model
+
+- States: active, inactive, completed
+- completed is terminal
+- Only active can trigger
+- Cooldown is independent of status
+
+Allowed transitions:
+
+```
+active   → inactive
+inactive → active
+active   → completed
+inactive → completed
+```
+
 ## References
 [^1]: [WGS84(World Geodetic System 1984)](https://en.wikipedia.org/wiki/World_Geodetic_System)
 
