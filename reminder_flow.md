@@ -37,7 +37,7 @@ Note over user,gf: Later, user enters geofence
 user->>gf: enters geofence
 gf->>mf: geofence event (reminder_id)
 
-mf->>mb: POST /reminders/{id}/event { type: "geofence_entered" }
+mf->>mb: POST /reminders/{id}/event
 
 mb->>db: update<br/>where status='active'<br/>and last_triggered_at IS NULL<br/>or cooldown passed
 
