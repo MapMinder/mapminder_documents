@@ -36,18 +36,15 @@ user_setting {
 reminder {
     varchar(40) reminder_id PK
     varchar(40) user_id FK
-
     varchar(255) title
     text description
-
     float latitude
     float longitude
+    varchar(255) location_name
     float radius
-
     varchar(20) status
     datetime last_triggered_at
     datetime completed_at
-
     datetime created_at
     datetime updated_at
 }
