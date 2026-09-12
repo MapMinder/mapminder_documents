@@ -10,25 +10,33 @@ erDiagram
 user {
     varchar(40) user_id PK
     varchar(60) username
-    varchar(255) email
     datetime created_at
     datetime updated_at
 }
 
-oauth_token {
-    int oauth_id PK
+account {
+    varchar(40) account_id PK
     varchar(40) user_id FK
-    varchar(50) oauth_provider
-    varchar(255) oauth_provider_id
-    datetime created_at
+    varchar(255) email
+    varchar(255) password_hash
+    boolean verified
     datetime updated_at
+}
+
+authentication_code {
+    varchar(40) authentication_code_id PK
+    varchar(40) account_id FK
+    varchar(255) authentication_code
+    int attempts
+    varchar(20) type
+    datetime expires_at
+    datetime consumed_at
+    datetime created_at
 }
 
 user_setting {
     varchar(40) user_setting_id PK
     varchar(40) user_id FK
-    varchar(10) theme
-    varchar(3) language
     datetime created_at
     datetime updated_at
 }
@@ -49,21 +57,17 @@ reminder {
     datetime updated_at
 }
 
-tag {
-    int tag_id PK
+trigger_history {
+    varchar(40) trigger_history_id PK
     varchar(40) reminder_id FK
-    varchar(20) tag
-}
-
-reminder_recurrence {
-    int recurrence_id PK
-    varchar(40) reminder_id FK
-    varchar(20) recurrence_type
+    boolean notified
+    text skip_reason
+    datetime triggered_at
 }
 
 user ||--o{ reminder : has
-user ||--o{ oauth_token : has
+user ||--|| account : has
 user ||--|| user_setting : has
-reminder ||--o{ tag : has
-reminder ||--o| reminder_recurrence : might_have
+account ||--o| authentication_code : has
+reminder ||--o{ trigger_history : has
 ```
